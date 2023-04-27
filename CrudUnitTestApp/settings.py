@@ -14,7 +14,10 @@ SECRET_KEY = 'django-insecure-_e%c$66d7p!_qc-%6ll92z75f&156w4r@-hpsxyhoo8%r53^^r
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+   'http://127.0.0.1:5500',        # enable CORS: allow RESTAPI (backend) hosted in Django application to be accessed 
+]  
 
 # Application definition
 
@@ -25,7 +28,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # auth third-party
+    'rest_framework.authtoken',
+    'djoser',
+
+    # third-party app
     'rest_framework',
+    'corsheaders',
+    'drf_yasg',
+
+    # local app
     'app',
 ]
 
@@ -37,6 +50,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # third-party middleware
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'CrudUnitTestApp.urls'
@@ -66,7 +82,7 @@ WSGI_APPLICATION = 'CrudUnitTestApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crudunittestapp',
+        'NAME': 'restdb',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST':'localhost',
@@ -74,7 +90,7 @@ DATABASES = {
     }
 }
 
-
+# APPEND_SLASH=False
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -117,3 +133,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static/')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
