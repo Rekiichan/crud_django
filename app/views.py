@@ -85,9 +85,7 @@ def get_item(request, *args, **kwargs):
 def update_and_delete_items(request,pk):
     if request.method == "POST":
         item_instance = models.Item.objects.filter(uuid = pk).first()
-        print("parsed ==========", item_instance)
         serializer_data = serializers_model.ItemSerializer(instance=item_instance, data=request.data)
-        print("serializer data", serializer_data)
 
         if serializer_data.is_valid():
             item = serializer_data.save()

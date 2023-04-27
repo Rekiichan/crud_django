@@ -17,14 +17,13 @@ urlpatterns = [
     path('get-user/', views.get_user, name='get-user'),
 
     # auth
-    path('auth/me', views.CheckMyAuth.as_view(), name = 'check-me'),
-    path('auth/login', views.AuthenLogin.as_view(), name = 'login'),
+    path('me', views.CheckMyAuth.as_view(), name = 'check-me'),
+    path('login', views.AuthenLogin.as_view(), name = 'login'),
 
 
-    path('auth/signup-client', views.AuthenSignupClient.as_view(), name = 'signup-client'),
-    path('auth/signup-admin', views.AuthenSignupAdmin.as_view(), name = 'signup-admin'),
+    path('signup-client', views.AuthenSignupClient.as_view(), name = 'signup-client'),
+    path('signup-admin', views.AuthenSignupAdmin.as_view(), name = 'signup-admin'),
     
-
 ]
 
 
